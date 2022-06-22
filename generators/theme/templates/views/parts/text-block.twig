@@ -1,0 +1,26 @@
+{% set layout = fn('get_field', 'layout') %}
+{% set body = fn('get_field', 'text') %}
+{% set schoolSelector = fn('get_field', 'school-selector') %}
+
+<section class="text-block">
+  <div class="inner {{ layout }}">
+    <div class="text-column animate__animated">
+      {{ body }}
+
+      {% if schoolSelector %}
+        <div class="school-selector animate__animated">
+          <h5>
+            Select a school from the dropdown below to give yourself a virtual
+            tour!
+          </h5>
+
+          <select name="" id="">
+            <option value="">
+              Select your school
+            </option>
+          </select>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
