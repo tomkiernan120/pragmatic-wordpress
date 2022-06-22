@@ -61,8 +61,6 @@ module.exports = class extends Generator {
       });
     }
 
-    console.log(this.answers);
-
     if (this.answers.use_lando) {
       // run lando init
       await this.spawnCommandSync("lando", [
