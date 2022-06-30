@@ -1,1 +1,40 @@
-# pragmatic-wordpress
+# Pragmatic Digital Static Site Builder
+This tool is used to build simple static sites using html, scss and JS.
+
+
+## Installation
+
+First, install [Yeoman](http://yeoman.io) and pramgatic-wordpress using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+
+```bash
+npm install -g yo
+npm install -g generator-pragmatic-wordpress
+```
+
+Then generate your new project:
+
+```bash
+yo pragmatic-wordpress
+```
+
+This will then asks you questions about the project and set it up with our regular buld process
+
+## currently in development
+
+You can also run
+
+```bash
+yo pragmatic-wordpress:theme
+```
+This will just generate the theme, this is currently tied too closely by paths to the parent generator
+
+## License
+
+Apache-2.0 © [pragmatic-jeb]()
+
+
+# TODO
+- Setup Lando for spinning up the development environment easier
+- Setup Husky so all commits are uniform
+- Update any missing dependancies
+- Add a sub generator for creating plugins
