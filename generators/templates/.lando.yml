@@ -1,0 +1,7 @@
+name: 
+recipe: wordpress
+config:
+  webroot: .
+
+services:
+  phpmyadmin:

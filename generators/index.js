@@ -1,4 +1,5 @@
 const { default: slugify } = require("slugify");
+const path = require("path");
 var Generator = require("yeoman-generator");
 var ThemeGenerator = require("generator-pragmatic-wordpress-theme");
 
@@ -39,19 +40,31 @@ module.exports = class extends Generator {
     // clone wordpress
     await this.spawnCommandSync("git", [
       "clone",
-      "git://develop.git.wordpress.org/",
+      "git@github.com:WordPress/WordPress.git",
       this.destinationRoot(),
     ]);
 
+    // move wordpress to root
+    // await this.spawnCommandSync("mv", ["Wordpress/*", "./"]);
+
+    // delete Wordpress folder
+    // await this.spawnCommandSync("rm", ["-rf", "Wordpress"]);
+
     // delete .git folder
     await this.spawnCommandSync("rm", ["-rf", this.destinationPath(".git")]);
+    await this.spawnCommandSync("rm", ["-rf", this.destinationPath(".github")]); // potential to break if added into existing repo
 
     if (!this.answers.defaultTheme) {
       // delete theme
       await this.spawnCommandSync("rm", [
         "-rf",
-        this.destinationPath("wp-content/themes"),
+        path.join(this.destinationPath("wp-content/themes"), '/*'),
       ]);
+    }
+
+    if (this.answers.use_lando) {
+      // copy dot files files
+      await this.fs.copy(this.templatePath(".lando.yml"), this.destinationRoot());
     }
 
     if (this.answers.run_theme_generate) {
@@ -59,17 +72,6 @@ module.exports = class extends Generator {
       await this.composeWith(require.resolve("./theme"), {
         answers: this.answers,
       });
-    }
-
-    if (this.answers.use_lando) {
-      // run lando init
-      await this.spawnCommandSync("lando", [
-        "init",
-        "--recipe",
-        "wordpress",
-        "--name",
-        this.answers.name,
-      ]);
     }
   }
 };
