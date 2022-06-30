@@ -94,7 +94,6 @@ module.exports = class extends Generator {
     );
 
     await this.fs.commit([], () => {
-      console.log("commit");
       this._installDependencies();
       this._installComposer();
     });
@@ -102,15 +101,16 @@ module.exports = class extends Generator {
 
   async _installDependencies() {
     if (this.answers && this.answers.packages && this.answers.packages.length) {
-      var npmdir = path.join(
-        process.cwd(),
-        `/wp-content/themes/${this.answers.name}`
+
+
+      var packagePath = path.join(
+        this.destinationRoot(),
+        `wp-content/themes/${this.answers.name}`
       );
-
-      console.log(npmdir);
-
-      process.chdir(npmdir);
-      this.addDependencies(this.answers.packages);
+      
+      this.answers.packages.forEach(async (item) => {
+        await this.spawnCommandSync("npm", ["install", item, packagePath]);
+      });
     }
   }
 

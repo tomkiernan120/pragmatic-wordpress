@@ -56,6 +56,7 @@ module.exports = class extends Generator {
 
     if (!this.answers.defaultTheme) {
       // delete theme
+      console.log('delete themes')
       await this.spawnCommandSync("rm", [
         "-rf",
         path.join(this.destinationPath("wp-content/themes"), '/*'),
