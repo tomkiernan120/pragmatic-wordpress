@@ -17,7 +17,6 @@
     "generators"
   ],
   "dependencies": {
-    "generator-pragmatic-wordpress-theme": "file:../yeo-wordpress-theme",
     "lodash": "^4.17.21",
     "slugify": "^1.6.5",
     "yeoman-generator": "^5.6.1"
