@@ -1,7 +1,6 @@
 const { default: slugify } = require("slugify");
 const path = require("path");
 var Generator = require("yeoman-generator");
-var ThemeGenerator = require("generator-pragmatic-wordpress-theme");
 
 module.exports = class extends Generator {
   async prompting() {
